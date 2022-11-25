@@ -5,10 +5,11 @@ declare_id!("5vN1TJXtrms8qc9MEh8iQXwRe7DhiqV7bS8bHvEhUvth");
 #[program]
 pub mod gm_anchor {
    use super::*;
-   pub fn execute(ctx: Context<Execute>, name: String) -> Result<()> {
+   pub fn execute(ctx: Context<Execute>, name: String, age: u8) -> Result<()> {
        let gm_account = &mut ctx.accounts.gm_account;
 
        gm_account.name = name;
+       gm_account.age = age;
        msg!("GM {}", gm_account.name);
        Ok(())
    }
@@ -26,4 +27,5 @@ pub struct Execute<'info> {
 #[account]
 pub struct GreetingAccount {
    pub name: String,
+   pub age: u8
 }

@@ -29,8 +29,9 @@ describe("gm-anchor", () => {
 
   it("Writes to gmAccount", async () => {
     let inputName = "Glass Chewer";
+    let inputAge = 30;
     const tx = await program.methods
-      .execute(inputName)
+      .execute(inputName, inputAge)
       .accounts({
         gmAccount: gmAccount.publicKey,
         user: user.publicKey,
@@ -43,7 +44,10 @@ describe("gm-anchor", () => {
       gmAccount.publicKey
     );
     const storedName = storedGmAccount.name;
+    const storedAge = storedGmAccount.age;
     console.log("Stored GM Name Is:", storedName);
+    console.log("Stored GM Age Is:", storedAge);
     assert.equal(storedName, inputName);
+    assert.equal(storedAge, inputAge);
   });
 });
